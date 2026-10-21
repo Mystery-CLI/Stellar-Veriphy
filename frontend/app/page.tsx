@@ -6,6 +6,7 @@ import { ExplorePreviewSection } from "@/components/landing/ExplorePreviewSectio
 import { Header } from "@/components/landing/Header";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
+import { PartnersSupportersSection } from "@/components/landing/PartnersSupportersSection";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
         <ExplorePreviewSection />
         <EcosystemSection />
         <CallToActionSection />
+        <PartnersSupportersSection />
         <Footer />
       </div>
     </main>
