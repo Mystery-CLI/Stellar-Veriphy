@@ -187,7 +187,11 @@ export interface CertificateCardProps {
   creator: string;
   timestamp: number;
   status: CertificateCardStatus;
+  /** Optional verification tier shown beside the status. */
+  verificationLevel?: "Basic" | "Standard" | "Premium" | "Enterprise";
   storageRef?: string;
+  /** Optional provenance facts shown without opening the certificate. */
+  provenance?: Array<{ label: string; value: string }>;
   onClick?: () => void;
   className?: string;
   /** Optional footer actions slot */
@@ -214,7 +218,9 @@ export const CertificateCard = React.memo(function CertificateCard({
   creator,
   timestamp,
   status,
+  verificationLevel,
   storageRef,
+  provenance,
   onClick,
   className,
   actions,
@@ -299,6 +305,11 @@ export const CertificateCard = React.memo(function CertificateCard({
             <span className={cn("w-1.5 h-1.5 rounded-full", statusCfg.dot)} aria-hidden="true" />
             {statusCfg.label}
           </span>
+          {verificationLevel && (
+            <span className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700 dark:border-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
+              {verificationLevel} proof
+            </span>
+          )}
         </div>
 
         {/* Details */}
@@ -336,6 +347,14 @@ export const CertificateCard = React.memo(function CertificateCard({
               </dd>
             </div>
           )}
+          {provenance?.slice(0, 3).map((item) => (
+            <div key={item.label}>
+              <dt className="text-xs text-gray-400 dark:text-gray-500">{item.label}</dt>
+              <dd className="mt-0.5 truncate text-xs text-gray-700 dark:text-gray-300" title={item.value}>
+                {item.value}
+              </dd>
+            </div>
+          ))}
         </dl>
 
         {/* Footer actions */}

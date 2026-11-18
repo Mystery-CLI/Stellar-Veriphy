@@ -12,6 +12,7 @@ interface OnboardingScreen {
   title: string;
   description: string;
   next: string;
+  items: string[];
 }
 
 const SCREENS: OnboardingScreen[] = [
@@ -20,24 +21,28 @@ const SCREENS: OnboardingScreen[] = [
     title: "Creator setup checklist",
     description: "Complete these steps to create your first verifiable asset.",
     next: "Start with a Stellar wallet",
+    items: ["Connect the wallet that will sign your verification records."],
   },
   {
     icon: KeyRound,
     title: "Connect your wallet",
     description: "Use a Stellar wallet to sign verification records.",
     next: "Then upload a photo, video, or document",
+    items: ["Choose a wallet such as Freighter.", "Approve the connection when prompted."],
   },
   {
     icon: UploadCloud,
     title: "Upload your asset",
     description: "Choose a file and add the creator details you want recorded.",
     next: "Review the details before submitting",
+    items: ["Select a supported media file.", "Add the creator key and any useful provenance details."],
   },
   {
     icon: CheckCircle2,
     title: "Verify and track it",
     description: "Submit the asset, then follow its verification status from your jobs list.",
     next: "Finish setup and upload your first asset",
+    items: ["Review the generated file hash.", "Sign the request and track the result in My verification jobs."],
   },
 ];
 
@@ -137,6 +142,15 @@ export function OnboardingFlow() {
           </h2>
           <p className="text-sm text-gray-600 dark:text-gray-400 max-w-sm">{screen.description}</p>
           <div className="mt-5 w-full max-w-sm rounded-lg bg-gray-50 p-3 text-left dark:bg-gray-800/70">
+            <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Checklist</p>
+            <ul className="mt-2 space-y-2">
+              {screen.items.map((item) => (
+                <li key={item} className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-200">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
             <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Next</p>
             <p className="mt-1 text-sm text-gray-700 dark:text-gray-200">{screen.next}</p>
           </div>
